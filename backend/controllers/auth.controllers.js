@@ -38,4 +38,8 @@ const signupUser = async (req, res) => {
   res.status(200).json(new ApiResponse(200, createdUser, "SignUp sucessfully"));
 };
 
-export { signupUser };
+const loginUser = async (req, res) => {
+  //something
+};
+
+export { signupUser, loginUser };

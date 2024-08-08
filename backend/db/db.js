@@ -4,7 +4,7 @@ dotenv.config();
 
 const connectToDatabase = () => {
   mongoose
-    .connect(process.env.MONGO_URL)
+    .connect(`${process.env.MONGO_URL}/mytodo`)
     .then(() => {
       console.log(`Connected to MongoDB sucessfully`);
     })
