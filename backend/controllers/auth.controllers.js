@@ -2,6 +2,14 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import User from "../models/user.model.js";
 
+const generateAccessToken = async (userId) => {
+  const user = await User.findById(userId);
+
+  const accessToken = user.generateAccessToken();
+
+  return accessToken;
+};
+
 const signupUser = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -39,7 +47,34 @@ const signupUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-  //something
+  const { email, password } = req.body;
+  if (!email || !password) {
+    res.status(400).json(new ApiError(400, "All fields are required"));
+  }
+
+  const user = await User.findOne({ email });
+  if (!user) {
+    res.status(404).json(new ApiError(404, "No user found"));
+  }
+
+  const isPasswordCorrect = await user.isPasswordCorrect(password);
+  if (!isPasswordCorrect) {
+    res.status(401).json(new ApiError(401, "Incorrect password"));
+  }
+
+  const accessToken = generateAccessToken(user._id);
+
+  const loggedInUser = await User.findById(user._id).select("-password");
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  res
+    .status(200)
+    .cookie("accessToken", accessToken, options)
+    .json(new ApiResponse(200, loggedInUser, "Login sucessfull"));
 };
 
 export { signupUser, loginUser };
