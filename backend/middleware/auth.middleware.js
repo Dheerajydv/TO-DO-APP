@@ -4,10 +4,13 @@ import User from "../models/user.model.js";
 
 const verifyUser = async (req, _, next) => {
   try {
-    const token = req.cookie?.accessToken;
+    const token =
+      req.cookie?.accessToken ||
+      req.header("Authorization")?.replace("Bearer ", "");
     if (!token) {
       throw new ApiError(401, "Unauthorised request");
     }
+    console.log(process.env.ACCESS_TOKEN_SECRET);
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
     const user = await User.findById(decodedToken._id).select("-password");
@@ -18,11 +21,7 @@ const verifyUser = async (req, _, next) => {
     req.user = user;
     next();
   } catch (error) {
-    res
-      .status(500)
-      .json(
-        new ApiError(500, "error occured in verifyUser function in middlewares")
-      );
+    console.error("some error in verify user function", error);
   }
 };
 
