@@ -52,27 +52,59 @@ const createTodo = async (req, res) => {
 };
 
 const editTodo = async (req, res) => {
-  const { newTodoRequest } = req.body;
-  if (!newTodoRequest) {
-    res.status(400).json(new ApiError(400, "Please enter the todo change"));
+  try {
+    const { newTodoRequest } = req.body;
+    if (!newTodoRequest) {
+      res.status(400).json(new ApiError(400, "Please enter the todo change"));
+    }
+
+    const todoId = req.params.id;
+    if (!todoId) {
+      res.status(400).json(new ApiError(400, "Please enter the todo id"));
+    }
+
+    let oldTodo = await Todo.findById(todoId);
+
+    oldTodo.todo = newTodoRequest || oldTodo.todo;
+
+    oldTodo = await oldTodo.save();
+
+    res
+      .status(200)
+      .json(new ApiResponse(200, oldTodo, "Todo editing completed"));
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json(new ApiError(500, "Some error occured in eidt todo controller"));
   }
-
-  const todoId = req.params.id;
-  if (!todoId) {
-    res.status(400).json(new ApiError(400, "Please enter the todo id"));
-  }
-
-  let oldTodo = await Todo.findById(todoId);
-
-  oldTodo.todo = newTodoRequest || oldTodo.todo;
-
-  oldTodo = await oldTodo.save();
-
-  res.status(200).json(new ApiResponse(200, oldTodo, "Todo editing completed"));
 };
 
 const markTodoComplete = async (req, res) => {
-  console.log("marked as done");
+  try {
+    const todoId = req.params.id;
+
+    let todo = await Todo.findById(todoId);
+
+    if (todo.completed === false) {
+      todo.completed = true;
+    } else {
+      todo.completed = false;
+    }
+
+    todo = await todo.save();
+
+    res
+      .status(200)
+      .json(new ApiResponse(200, `todo marked as complete / not complete`));
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json(
+        new ApiError(500, "Some error occured in mark todo complete controller")
+      );
+  }
 };
 
 export { getAllTodos, createTodo, editTodo, markTodoComplete };
