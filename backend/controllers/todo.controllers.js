@@ -83,6 +83,9 @@ const editTodo = async (req, res) => {
 const markTodoComplete = async (req, res) => {
   try {
     const todoId = req.params.id;
+    if (!todoId) {
+      res.status(400).json(new ApiError(400, "Please enter the todo id"));
+    }
 
     let todo = await Todo.findById(todoId);
 
@@ -96,7 +99,9 @@ const markTodoComplete = async (req, res) => {
 
     res
       .status(200)
-      .json(new ApiResponse(200, `todo marked as complete / not complete`));
+      .json(
+        new ApiResponse(200, todo, `todo marked as complete / not complete`)
+      );
   } catch (error) {
     console.log(error);
     res
@@ -107,4 +112,24 @@ const markTodoComplete = async (req, res) => {
   }
 };
 
-export { getAllTodos, createTodo, editTodo, markTodoComplete };
+const deleteTodo = async (req, res) => {
+  try {
+    const todoId = req.params.id;
+    if (!todoId) {
+      res.status(400).json(new ApiError(400, "Please enter the todo id"));
+    }
+
+    const todo = await Todo.findByIdAndDelete(todoId);
+
+    res
+      .status(200)
+      .json(new ApiResponse(200, todo, "Todo deleted sucessfully"));
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json(new ApiError(500, "Some error occured in delete todo controller"));
+  }
+};
+
+export { getAllTodos, createTodo, editTodo, markTodoComplete, deleteTodo };
