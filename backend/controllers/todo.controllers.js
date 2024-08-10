@@ -51,4 +51,28 @@ const createTodo = async (req, res) => {
   }
 };
 
-export { getAllTodos, createTodo };
+const editTodo = async (req, res) => {
+  const { newTodoRequest } = req.body;
+  if (!newTodoRequest) {
+    res.status(400).json(new ApiError(400, "Please enter the todo change"));
+  }
+
+  const todoId = req.params.id;
+  if (!todoId) {
+    res.status(400).json(new ApiError(400, "Please enter the todo id"));
+  }
+
+  let oldTodo = await Todo.findById(todoId);
+
+  oldTodo.todo = newTodoRequest || oldTodo.todo;
+
+  oldTodo = await oldTodo.save();
+
+  res.status(200).json(new ApiResponse(200, oldTodo, "Todo editing completed"));
+};
+
+const markTodoComplete = async (req, res) => {
+  console.log("marked as done");
+};
+
+export { getAllTodos, createTodo, editTodo, markTodoComplete };
