@@ -1,14 +1,24 @@
-import { Routes, Route } from "react-router-dom";
-
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "../src/pages/Login";
-import Navbar from "../src/components/Navbar";
+import Home from "../src/pages/Home";
+import Signup from "../src/pages/Signup";
+import { useState } from "react";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  // const navigate = useNavigate();
   return (
     <>
-      <Navbar />
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Navigate to="/" /> : <Login />}
+        />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </>
   );
