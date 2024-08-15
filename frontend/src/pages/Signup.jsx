@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import Navbar from "../components/Navbar";
 
@@ -24,16 +23,16 @@ export default function Signup() {
         className={
           theme === "dark"
             ? "h-screen w-screen flex justify-center items-center bg-black text-white"
-            : "h-screen w-screen flex justify-center items-center"
+            : "h-screen w-screen flex justify-center items-center "
         }
       >
-        <form className="shadow-2xl border rounded-xl h-4/5 w-2/6 flex flex-col justify-center items-center gap-8">
+        <form className="shadow-2xl border rounded-xl  h-4/5 w-2/6 flex flex-col justify-center items-center gap-8">
           <h1 className="font-extrabold text-2xl">Signup</h1>
           <input
             type="text"
             name="username"
             value={data.username}
-            onChange={(e) => setData((data.username = e.target.value))}
+            onChange={(e) => setData({ ...data, username: e.target.value })}
             className={
               theme === "dark"
                 ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-black text-white border-white"
@@ -45,7 +44,12 @@ export default function Signup() {
             type="text"
             name="email"
             value={data.email}
-            onChange={(e) => setData((data.email = e.target.value))}
+            onChange={(e) =>
+              setData({
+                ...data,
+                email: e.target.value,
+              })
+            }
             className={
               theme === "dark"
                 ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-black text-white border-white"
@@ -54,10 +58,15 @@ export default function Signup() {
             placeholder="Enter you Email"
           />
           <input
-            type="text"
+            type="password"
             name="password"
             value={data.password}
-            onChange={(e) => setData((data.password = e.target.value))}
+            onChange={(e) =>
+              setData({
+                ...data,
+                password: e.target.value,
+              })
+            }
             className={
               theme === "dark"
                 ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-black text-white border-white"

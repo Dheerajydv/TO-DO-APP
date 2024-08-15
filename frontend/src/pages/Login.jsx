@@ -1,10 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 export default function Login() {
   const { theme } = useContext(ThemeContext);
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log(data);
+  };
   return (
     <>
       <Navbar />
@@ -20,6 +28,8 @@ export default function Login() {
           <input
             type="text"
             name="email"
+            value={data.email}
+            onChange={(e) => setData({ ...data, email: e.target.value })}
             className={
               theme === "dark"
                 ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-black text-white border-white"
@@ -28,8 +38,10 @@ export default function Login() {
             placeholder="Enter you Email"
           />
           <input
-            type="text"
+            type="password"
             name="password"
+            value={data.password}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
             className={
               theme === "dark"
                 ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-black text-white border-white"
@@ -37,7 +49,10 @@ export default function Login() {
             }
             placeholder="Enter your password"
           />
-          <button className="h-12 w-6/12 rounded-lg px-4 py-0 bg-blue-500 hover:bg-blue-700 text-white">
+          <button
+            onClick={handleLogin}
+            className="h-12 w-6/12 rounded-lg px-4 py-0 bg-blue-500 hover:bg-blue-700 text-white"
+          >
             Login
           </button>
           <Link

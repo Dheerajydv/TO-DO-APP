@@ -5,6 +5,7 @@ import { ThemeContext } from "../contexts/ThemeContext";
 
 export default function Home() {
   const { theme } = useContext(ThemeContext);
+
   return (
     <div
       className={
