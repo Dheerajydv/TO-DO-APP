@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 export default function EntryBox() {
+  const { theme } = useContext(ThemeContext);
   return (
     <div className="h-32 w-2/4">
       <input
@@ -8,7 +10,11 @@ export default function EntryBox() {
         name="username"
         // value={data.username}
         // onChange={(e) => setData((data.username = e.target.value))}
-        className="h-12 w-8/12 rounded-lg px-4 py-0 border border-black mx-2 "
+        className={
+          theme === "dark"
+            ? "h-12 w-8/12 rounded-lg px-4 py-0 border border-white bg-black mx-2"
+            : "h-12 w-8/12 rounded-lg px-4 py-0 border border-black mx-2"
+        }
         placeholder="Enter you Todo"
       />
       <button className="bg-blue-500 hover:bg-blue-700 text-white h-12 w-3/12 mx-2 rounded-lg px-2 ">

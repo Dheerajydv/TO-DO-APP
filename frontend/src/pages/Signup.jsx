@@ -34,7 +34,11 @@ export default function Signup() {
             name="username"
             value={data.username}
             onChange={(e) => setData((data.username = e.target.value))}
-            className="h-12 w-6/12 rounded-lg px-4 py-0 border border-black  "
+            className={
+              theme === "dark"
+                ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-black text-white border-white"
+                : "h-12 w-6/12 rounded-lg px-4 py-0 border border-black"
+            }
             placeholder="Enter you Username"
           />
           <input
@@ -42,7 +46,11 @@ export default function Signup() {
             name="email"
             value={data.email}
             onChange={(e) => setData((data.email = e.target.value))}
-            className="h-12 w-6/12 rounded-lg px-4 py-0 border border-black  "
+            className={
+              theme === "dark"
+                ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-black text-white border-white"
+                : "h-12 w-6/12 rounded-lg px-4 py-0 border border-black"
+            }
             placeholder="Enter you Email"
           />
           <input
@@ -50,7 +58,11 @@ export default function Signup() {
             name="password"
             value={data.password}
             onChange={(e) => setData((data.password = e.target.value))}
-            className="h-12 w-6/12 rounded-lg px-4 py-0 border border-black "
+            className={
+              theme === "dark"
+                ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-black text-white border-white"
+                : "h-12 w-6/12 rounded-lg px-4 py-0 border border-black"
+            }
             placeholder="Enter your password"
           />
           <button

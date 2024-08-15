@@ -19,7 +19,10 @@ function App() {
           path="/login"
           element={isAuthenticated ? <Navigate to="/" /> : <Login />}
         />
-        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/signup"
+          element={isAuthenticated ? <Navigate to="/" /> : <Signup />}
+        />
       </Routes>
     </ThemeContextProvider>
   );

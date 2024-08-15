@@ -20,13 +20,21 @@ export default function Login() {
           <input
             type="text"
             name="email"
-            className="h-12 w-6/12 rounded-lg px-4 py-0 border border-black  "
+            className={
+              theme === "dark"
+                ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-black text-white border-white"
+                : "h-12 w-6/12 rounded-lg px-4 py-0 border border-black"
+            }
             placeholder="Enter you Email"
           />
           <input
             type="text"
             name="password"
-            className="h-12 w-6/12 rounded-lg px-4 py-0 border border-black "
+            className={
+              theme === "dark"
+                ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-black text-white border-white"
+                : "h-12 w-6/12 rounded-lg px-4 py-0 border border-black"
+            }
             placeholder="Enter your password"
           />
           <button className="h-12 w-6/12 rounded-lg px-4 py-0 bg-blue-500 hover:bg-blue-700 text-white">
