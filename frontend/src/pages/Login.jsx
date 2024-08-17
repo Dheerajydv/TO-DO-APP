@@ -4,9 +4,11 @@ import Navbar from "../components/Navbar";
 import { ThemeContext } from "../contexts/ThemeContext";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function Login() {
   const { theme } = useContext(ThemeContext);
+  const { setIsAuthenticated } = useContext(AuthContext);
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -20,9 +22,11 @@ export default function Login() {
         {
           email,
           password,
-        }
+        },
+        { withCredentials: true }
       );
       toast.success(result.data.message);
+      setIsAuthenticated(true);
     } catch (error) {
       toast.error(error.message);
     }

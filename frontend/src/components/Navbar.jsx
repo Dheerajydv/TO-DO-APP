@@ -5,6 +5,10 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function Navbar() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const { theme, setTheme } = useContext(ThemeContext);
+  const handleLogout = () => {
+    document.cookie = `accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    setIsAuthenticated(false);
+  };
   const changeTheme = () => {
     if (theme === "light") {
       setTheme("dark");
@@ -42,7 +46,10 @@ export default function Navbar() {
             />
           </div>
 
-          <button className="h-4/5 w-24 bg-blue-500 text-white rounded-xl text-lg hover:bg-blue-700 ">
+          <button
+            onClick={handleLogout}
+            className="h-4/5 w-24 bg-blue-500 text-white rounded-xl text-lg hover:bg-blue-700 "
+          >
             Logout
           </button>
         </div>

@@ -1,12 +1,22 @@
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import axios from "axios";
+import { toast, Toaster } from "react-hot-toast";
 
 export default function EntryBox() {
   const { theme } = useContext(ThemeContext);
   const [todo, setTodo] = useState("");
-  const handleAdd = (e) => {
+  const handleAdd = async (e) => {
     e.preventDefault();
-    console.log(todo);
+    try {
+      const result = await axios.post(
+        "http://localhost:8000/api/v1/todos/createtodo",
+        { todo }
+      );
+      toast.success(result.data.message);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="h-32 flex justify-center items-center w-4/5 sm:w-9/12 lg:w-3/5 xl:w-2/4">
