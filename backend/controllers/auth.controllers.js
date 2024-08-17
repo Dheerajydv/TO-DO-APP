@@ -87,7 +87,6 @@ const loginUser = async (req, res) => {
       httpOnly: true,
       secure: true,
     };
-    console.log(accessToken);
 
     res
       .status(200)

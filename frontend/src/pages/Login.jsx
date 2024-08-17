@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { ThemeContext } from "../contexts/ThemeContext";
+import axios from "axios";
+import { toast, Toaster } from "react-hot-toast";
 
 export default function Login() {
   const { theme } = useContext(ThemeContext);
@@ -9,9 +11,21 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(data);
+    try {
+      const { email, password } = data;
+      const result = await axios.post(
+        "http://localhost:8000/api/v1/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+      toast.success(result.data.message);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   return (
     <>
@@ -62,6 +76,7 @@ export default function Login() {
             Signup
           </Link>
         </form>
+        <Toaster />
       </div>
     </>
   );

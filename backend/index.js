@@ -4,6 +4,7 @@ import connectToDatabase from "./db/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import todoRoutes from "./routes/todo.routes.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 const app = express();
 dotenv.config();
@@ -11,6 +12,7 @@ dotenv.config();
 // Middlewares
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use("/api/v1/auth", authRoutes);
