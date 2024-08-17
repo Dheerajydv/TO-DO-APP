@@ -9,7 +9,7 @@ export default function EntryBox() {
     console.log(todo);
   };
   return (
-    <div className="h-32 w-2/4">
+    <div className="h-32 flex justify-center items-center w-4/5 sm:w-9/12 lg:w-3/5 xl:w-2/4">
       <input
         type="text"
         name="todo"

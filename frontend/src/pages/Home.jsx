@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Navbar from "../components/Navbar";
 import EntryBox from "../components/EntryBox";
 import { ThemeContext } from "../contexts/ThemeContext";
+import TodoBox from "../components/TodoBox";
 
 export default function Home() {
   const { theme } = useContext(ThemeContext);
@@ -15,8 +16,11 @@ export default function Home() {
       }
     >
       <Navbar />
-      <div className="flex my-4 justify-center">
+      <div className="flex mt-4  w-screen items-center justify-center">
         <EntryBox />
+      </div>
+      <div className="flex min-h-screen my-4 w-screen flex-col items-center justify-start">
+        <TodoBox />
       </div>
     </div>
   );
