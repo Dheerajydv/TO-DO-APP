@@ -17,14 +17,11 @@ export default function Signup() {
     e.preventDefault();
     try {
       const { username, email, password } = data;
-      const result = await axios.post(
-        "http://localhost:8000/api/v1/auth/signup",
-        {
-          username,
-          email,
-          password,
-        }
-      );
+      const result = await axios.post("/api/v1/auth/signup", {
+        username,
+        email,
+        password,
+      });
       toast.success(result.data.message);
     } catch (error) {
       toast.error(error.message);

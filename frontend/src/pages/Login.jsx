@@ -18,7 +18,7 @@ export default function Login() {
     try {
       const { email, password } = data;
       const result = await axios.post(
-        "http://localhost:8000/api/v1/auth/login",
+        "/api/v1/auth/login",
         {
           email,
           password,

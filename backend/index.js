@@ -1,4 +1,4 @@
-import express from "express";
+import express, { urlencoded } from "express";
 import dotenv from "dotenv";
 import connectToDatabase from "./db/db.js";
 import authRoutes from "./routes/auth.routes.js";
@@ -12,10 +12,11 @@ dotenv.config();
 // Middlewares
 app.use(cookieParser());
 app.use(express.json());
+// app.use(express.urlencoded());
 app.use(
   cors({
     origin: "http://localhost:5173", // Change to your frontend's URL
-    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+    // Allow credentials (cookies, authorization headers, etc.)
   })
 );
 

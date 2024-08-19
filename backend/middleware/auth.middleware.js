@@ -4,7 +4,6 @@ import User from "../models/user.model.js";
 
 const verifyUser = async (req, _, next) => {
   try {
-    console.log(req.cookies);
     const token =
       req.cookies?.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "");

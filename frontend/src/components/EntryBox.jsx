@@ -9,10 +9,7 @@ export default function EntryBox() {
   const handleAdd = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post(
-        "http://localhost:8000/api/v1/todos/createtodo",
-        { todo }
-      );
+      const result = await axios.post("/api/v1/todos/createtodo", { todo });
       toast.success(result.data.message);
     } catch (error) {
       console.log(error);

@@ -80,7 +80,7 @@ const loginUser = async (req, res) => {
     }
 
     const accessToken = await generateAccessToken(user._id);
-    console.log(accessToken);
+    // console.log(accessToken);
 
     const loggedInUser = await User.findById(user._id).select("-password");
 
@@ -88,6 +88,8 @@ const loginUser = async (req, res) => {
       httpOnly: true,
       secure: false,
     };
+
+    console.log(accessToken);
 
     res
       .status(200)

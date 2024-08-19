@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 export default function Todo(props) {
-  const handleComplete = () => {
-    console.log("completed");
+  const [isCompleted, setIsCompleted] = useState(props.todo.completed);
+  const handleComplete = async (e) => {
+    e.preventDefault();
+    await axios.post(`/api/v1/todos/markdone/${props.todo._id}`);
+    if (isCompleted) {
+      setIsCompleted(false);
+    } else {
+      setIsCompleted(true);
+    }
   };
-  const handleEdit = () => {
+  const handleEdit = (e) => {
+    e.preventDefault();
     console.log("edit");
   };
-  const handleDelete = () => {
+  const handleDelete = async (e) => {
+    e.preventDefault();
     console.log("Delete");
+    const result = await axios.delete(`/api/v1/todos/delete/${props.todo._id}`);
   };
   return (
     <div className="bg-blue-500 hover:bg-blue-700 rounded-xl flex justify-around items-center min-h-12 w-11/12 my-4 ">
@@ -20,7 +31,9 @@ export default function Todo(props) {
         >
           ✔
         </button>
-        <p className="truncate">{props.todo}</p>
+        <p className={isCompleted ? "truncate line-through" : "truncate"}>
+          {props.todo.todo}
+        </p>
       </div>
       <div className="h-2/5 flex justify-between items-center gap-2">
         <button name="editBtn" onClick={handleEdit} className="bg-red-100 ">

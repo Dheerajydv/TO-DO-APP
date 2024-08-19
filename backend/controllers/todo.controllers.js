@@ -21,7 +21,6 @@ const createTodo = async (req, res) => {
   try {
     const { todo } = req.body;
     const creater = req.user._id.toString();
-    console.log(creater);
 
     if (!todo) {
       res
