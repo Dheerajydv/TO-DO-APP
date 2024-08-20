@@ -37,7 +37,7 @@ export default function Login() {
       <div
         className={
           theme === "dark"
-            ? "h-screen w-screen flex justify-center items-center bg-black text-white"
+            ? "h-screen w-screen flex justify-center items-center bg-gray-950 text-white"
             : "h-screen w-screen  flex justify-center items-center"
         }
       >
@@ -50,7 +50,7 @@ export default function Login() {
             onChange={(e) => setData({ ...data, email: e.target.value })}
             className={
               theme === "dark"
-                ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-black text-white border-white"
+                ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-gray-950 text-white border-white"
                 : "h-12 w-6/12 rounded-lg px-4 py-0 border border-black"
             }
             placeholder="Enter you Email"
@@ -62,7 +62,7 @@ export default function Login() {
             onChange={(e) => setData({ ...data, password: e.target.value })}
             className={
               theme === "dark"
-                ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-black text-white border-white"
+                ? "h-12 w-6/12 rounded-lg px-4 py-0 border bg-gray-950 text-white border-white"
                 : "h-12 w-6/12 rounded-lg px-4 py-0 border border-black"
             }
             placeholder="Enter your password"

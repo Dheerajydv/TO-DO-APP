@@ -11,7 +11,7 @@ export default function Home() {
     <div
       className={
         theme === "dark"
-          ? `h-screen w-screen bg-black text-white`
+          ? `h-screen w-screen bg-gray-950 text-white`
           : `h-screen w-screen`
       }
     >

@@ -20,21 +20,18 @@ export default function Navbar() {
     <div
       className={
         theme === "dark"
-          ? `h-16 w-full flex items-center justify-between px-4 bg-black text-white`
+          ? `h-16 w-full flex items-center justify-between px-4 bg-gray-950 text-white`
           : `h-16 w-full flex items-center justify-between px-4`
       }
     >
       <h1 className="font-extrabold text-2xl">ToDo-List</h1>
       <div>
-        <img
-          className="h-full w-14 rounded-full"
-          src={
-            theme === "light"
-              ? "../../public/assets/moon.png"
-              : "../../public/assets/sun.png"
-          }
+        <div
           onClick={changeTheme}
-        />
+          className="h-full w-20 cursor-pointer rounded-full"
+        >
+          {theme == "dark" ? "☀" : "🌛"}
+        </div>
       </div>
       {/* If  user logged in then show button and pfp otherwise enpty*/}
       {isAuthenticated ? (

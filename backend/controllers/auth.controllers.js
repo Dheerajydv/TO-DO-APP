@@ -89,7 +89,7 @@ const loginUser = async (req, res) => {
       secure: false,
     };
 
-    console.log(accessToken);
+    // console.log(accessToken);
 
     res
       .status(200)

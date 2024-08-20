@@ -24,7 +24,7 @@ export default function EntryBox() {
         onChange={(e) => setTodo(e.target.value)}
         className={
           theme === "dark"
-            ? "h-12 w-8/12 rounded-lg px-4 py-0 border border-white bg-black mx-2"
+            ? "h-12 w-8/12 rounded-lg px-4 py-0 border border-white bg-gray-950 mx-2"
             : "h-12 w-8/12 rounded-lg px-4 py-0 border border-black mx-2"
         }
         placeholder="Enter you Todo"

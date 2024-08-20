@@ -12,33 +12,33 @@ export default function Todo(props) {
       setIsCompleted(true);
     }
   };
-  const handleEdit = (e) => {
-    e.preventDefault();
-    console.log("edit");
-  };
+
   const handleDelete = async (e) => {
     e.preventDefault();
     console.log("Delete");
     const result = await axios.delete(`/api/v1/todos/delete/${props.todo._id}`);
   };
   return (
-    <div className="bg-blue-500 hover:bg-blue-700 rounded-xl flex justify-around items-center min-h-12 w-11/12 my-4 ">
-      <div className="w-3/5 flex items-center gap-2 ">
+    <div
+      className={
+        isCompleted
+          ? "bg-blue-400 hover:bg-blue-600 rounded-xl flex justify-around items-center min-h-12 w-11/12 my-4 "
+          : "bg-blue-500 hover:bg-blue-700 rounded-xl flex justify-around items-center min-h-12 w-11/12 my-4 "
+      }
+    >
+      <div onClick={handleComplete} className="w-3/5 flex items-center gap-2 ">
         <button
           name="completedBtn"
           onClick={handleComplete}
           className="bg-red-100  h-2/5 "
         >
-          ✔
+          {isCompleted ? "❗" : "✅"}
         </button>
         <p className={isCompleted ? "truncate line-through" : "truncate"}>
           {props.todo.todo}
         </p>
       </div>
       <div className="h-2/5 flex justify-between items-center gap-2">
-        <button name="editBtn" onClick={handleEdit} className="bg-red-100 ">
-          ✏
-        </button>
         <button name="deleteBtn" onClick={handleDelete} className="bg-red-100 ">
           ❌
         </button>
