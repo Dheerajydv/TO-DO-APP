@@ -80,7 +80,6 @@ const loginUser = async (req, res) => {
     }
 
     const accessToken = await generateAccessToken(user._id);
-    // console.log(accessToken);
 
     const loggedInUser = await User.findById(user._id).select("-password");
 

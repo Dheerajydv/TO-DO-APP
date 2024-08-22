@@ -99,7 +99,7 @@ export default function Signup() {
             Login
           </Link>
         </form>
-        <Toaster />
+        <Toaster position="bottom-right" />
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { AuthContext } from "../contexts/AuthContext";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function Navbar() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
@@ -12,8 +13,10 @@ export default function Navbar() {
   const changeTheme = () => {
     if (theme === "light") {
       setTheme("dark");
+      toast.success("Dark Mode Enabled");
     } else {
       setTheme("light");
+      toast.success("Light Mode Enabled");
     }
   };
   return (
@@ -51,6 +54,7 @@ export default function Navbar() {
           </button>
         </div>
       ) : null}
+      <Toaster position="bottom-right" />
     </div>
   );
 }

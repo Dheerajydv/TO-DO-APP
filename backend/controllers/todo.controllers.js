@@ -99,7 +99,9 @@ const markTodoComplete = async (req, res) => {
     res
       .status(200)
       .json(
-        new ApiResponse(200, todo, `todo marked as complete / not complete`)
+        todo.completed === true
+          ? new ApiResponse(200, todo, `todo marked as complete`)
+          : new ApiResponse(200, todo, `todo marked as not complete`)
       );
   } catch (error) {
     console.log(error);

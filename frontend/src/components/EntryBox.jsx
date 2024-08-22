@@ -10,7 +10,7 @@ export default function EntryBox() {
     e.preventDefault();
     try {
       const result = await axios.post("/api/v1/todos/createtodo", { todo });
-      toast.success(result.data.message);
+      toast.success(`${result.data.message}, Refresh the page to view`);
     } catch (error) {
       console.log(error);
     }
@@ -35,6 +35,7 @@ export default function EntryBox() {
       >
         Add
       </button>
+      <Toaster position="bottom-right" />
     </div>
   );
 }

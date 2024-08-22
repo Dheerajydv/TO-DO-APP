@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Todo(props) {
   const [isCompleted, setIsCompleted] = useState(props.todo.completed);
   const handleComplete = async (e) => {
     e.preventDefault();
-    await axios.post(`/api/v1/todos/markdone/${props.todo._id}`);
+    const result = await axios.post(`/api/v1/todos/markdone/${props.todo._id}`);
+    toast.success(result.data.message);
     if (isCompleted) {
       setIsCompleted(false);
     } else {
@@ -17,6 +19,8 @@ export default function Todo(props) {
     e.preventDefault();
     console.log("Delete");
     const result = await axios.delete(`/api/v1/todos/delete/${props.todo._id}`);
+    console.log(result.data.message);
+    toast.success(`${result.data.message}, Refresh the page to update`);
   };
   return (
     <div
@@ -43,6 +47,7 @@ export default function Todo(props) {
           ❌
         </button>
       </div>
+      <Toaster position="botton-right" />
     </div>
   );
 }

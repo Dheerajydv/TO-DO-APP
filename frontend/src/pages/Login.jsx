@@ -17,14 +17,22 @@ export default function Login() {
     e.preventDefault();
     try {
       const { email, password } = data;
-      const result = await axios.post(
-        "/api/v1/auth/login",
-        {
-          email,
-          password,
-        },
-        { withCredentials: true }
-      );
+      axios
+        .post(
+          "/api/v1/auth/login",
+          {
+            email,
+            password,
+          },
+          { withCredentials: true }
+        )
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
       toast.success(result.data.message);
       setIsAuthenticated(true);
     } catch (error) {
@@ -80,7 +88,7 @@ export default function Login() {
             Signup
           </Link>
         </form>
-        <Toaster />
+        <Toaster position="bottom-right" />
       </div>
     </>
   );
