@@ -84,8 +84,9 @@ const loginUser = async (req, res) => {
     const loggedInUser = await User.findById(user._id).select("-password");
 
     const options = {
-      httpOnly: true,
+      httpOnly: false,
       secure: false,
+      maxAge: 900000000000,
     };
 
     // console.log(accessToken);

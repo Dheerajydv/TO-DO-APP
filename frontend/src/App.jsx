@@ -5,6 +5,7 @@ import Signup from "../src/pages/Signup";
 import { useContext, useEffect } from "react";
 import { ThemeContextProvider } from "./contexts/ThemeContext";
 import { AuthContext } from "./contexts/AuthContext";
+import { TodoContextProvider } from "./contexts/TodoContext";
 
 function App() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
@@ -16,20 +17,22 @@ function App() {
   }, [setIsAuthenticated]);
   return (
     <ThemeContextProvider>
-      <Routes>
-        <Route
-          path="/"
-          element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/login"
-          element={isAuthenticated ? <Navigate to="/" /> : <Login />}
-        />
-        <Route
-          path="/signup"
-          element={isAuthenticated ? <Navigate to="/" /> : <Signup />}
-        />
-      </Routes>
+      <TodoContextProvider>
+        <Routes>
+          <Route
+            path="/"
+            element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/login"
+            element={isAuthenticated ? <Navigate to="/" /> : <Login />}
+          />
+          <Route
+            path="/signup"
+            element={isAuthenticated ? <Navigate to="/" /> : <Signup />}
+          />
+        </Routes>
+      </TodoContextProvider>
     </ThemeContextProvider>
   );
 }

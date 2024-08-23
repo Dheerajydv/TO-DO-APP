@@ -24,17 +24,15 @@ export default function Login() {
             email,
             password,
           },
-          { withCredentials: true }
+          { withCredentials: true, credentials: "include" }
         )
         .then(function (response) {
-          console.log(response.data);
+          toast.success(response.data.message);
+          setIsAuthenticated(true);
         })
         .catch(function (error) {
-          console.log(error);
+          toast.error(error.message);
         });
-
-      toast.success(result.data.message);
-      setIsAuthenticated(true);
     } catch (error) {
       toast.error(error.message);
     }
