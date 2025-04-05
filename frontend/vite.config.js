@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": "http://localhost:4000",
+      "/api": "https://to-do-app-pdu9.onrender.com",
     },
   },
 });
