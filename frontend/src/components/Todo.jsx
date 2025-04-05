@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -17,9 +17,7 @@ export default function Todo(props) {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    console.log("Delete");
     const result = await axios.delete(`/api/v1/todos/delete/${props.todo._id}`);
-    console.log(result.data.message);
     toast.success(`${result.data.message}, Refresh the page to update`);
   };
   return (
