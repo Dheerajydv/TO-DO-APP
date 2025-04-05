@@ -40,10 +40,7 @@ export default function Navbar() {
       {isAuthenticated ? (
         <div className="flex justify-between h-full items-center gap-4">
           <div>
-            <img
-              src="../public/assets/pfp.jpg"
-              className="h-full w-14 rounded-full"
-            />
+            <img src="../assets/pfp.jpg" className="h-full w-14 rounded-full" />
           </div>
 
           <button
